@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_main">Main</string>
+    <string name="app_name">ANESample</string>
+    <string name="yahoo">Yahoo</string>
+    <string name="cnn">CNN</string>
+</resources>

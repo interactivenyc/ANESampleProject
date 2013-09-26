@@ -1,0 +1,13 @@
+<extension xmlns="http://ns.adobe.com/air/extension/3.8">
+  <id>com.adobe.sampleasextension</id>
+  <versionNumber>1</versionNumber>
+  <platforms>
+    <platform name="Android-ARM">
+      <applicationDeployment>
+        <nativeLibrary>ANESample.jar</nativeLibrary>
+        <initializer>com.adobe.sampleasextension.ANESample</initializer>
+        <finalizer>com.adobe.sampleasextension.ANESample</finalizer>
+      </applicationDeployment>
+    </platform>
+  </platforms>
+</extension>
