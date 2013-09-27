@@ -2,6 +2,7 @@
   <id>com.adobe.sampleasextension</id>
   <versionNumber>1</versionNumber>
   <platforms>
+      
     <platform name="Android-ARM">
       <applicationDeployment>
         <nativeLibrary>ANESample.jar</nativeLibrary>
@@ -9,5 +10,10 @@
         <finalizer>com.adobe.sampleasextension.ANESample</finalizer>
       </applicationDeployment>
     </platform>
+    
+    <platform name="default">
+        <applicationDeployment/>
+    </platform>
+    
   </platforms>
 </extension>
