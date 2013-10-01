@@ -6,8 +6,8 @@
     <platform name="Android-ARM">
       <applicationDeployment>
         <nativeLibrary>ANESample.jar</nativeLibrary>
-        <initializer>com.adobe.sampleasextension.ANESample</initializer>
-        <finalizer>com.adobe.sampleasextension.ANESample</finalizer>
+        <initializer>com.adobe.sampleasextension.SampleASExtension</initializer>
+        <finalizer>com.adobe.sampleasextension.SampleASExtension</finalizer>
       </applicationDeployment>
     </platform>
     
