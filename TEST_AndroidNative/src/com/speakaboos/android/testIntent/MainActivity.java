@@ -72,7 +72,8 @@ public class MainActivity extends Activity {
 		
 		log("intentAvailable: "+ isIntentAvailable(this, sendIntent));
 		
-		startActivityForResult(sendIntent, REQUEST_CODE);
+		//startActivityForResult(sendIntent, REQUEST_CODE);
+		startActivity(Intent.createChooser(sendIntent, "Testing Intent Chooser."));
 	}
 	
 	@Override
