@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_activity_main">Main</string>
+    <string name="app_name">ANESample</string>
+    <string name="yahoo">Yahoo</string>
+    <string name="cnn">CNN</string>
+    <string name="title_activity_intent">IntentActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_send_intent">SendIntentActivity</string>
+
+</resources>
