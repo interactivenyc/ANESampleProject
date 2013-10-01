@@ -21,6 +21,7 @@ public class ANESampleContext extends FREContext
 		Map<String, FREFunction> functionMap = new HashMap<String, FREFunction>();
 		functionMap.put("getVersion", new getVersion() );
 		functionMap.put("showBrowser", new showBrowser() );
+		functionMap.put("sendIntent", new sendIntent() );
 		functionMap.put("initMe", new initFunction() );
 
 		return functionMap;

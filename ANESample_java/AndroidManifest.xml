@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.adobe.sampleasextension"
-      android:versionCode="1"
-      android:versionName="1.0">
-    <uses-sdk 
-        android:minSdkVersion="8" 
-        android:targetSdkVersion="15"/>
-    
+    package="com.adobe.sampleasextension"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
 
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".SendIntentActivity"
+            android:label="SendIntentActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.adobe.sampleasextension.SEND_INTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.speakaboos.android.intent.SHARE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="intenttestair" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
     </application>
+
 </manifest>
