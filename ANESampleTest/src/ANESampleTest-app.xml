@@ -37,6 +37,22 @@
 			    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
 				<application android:enabled="true" android:debuggable="true">
     				<activity android:name="com.adobe.sampleasextension.WebViewActivity"></activity>
+    				
+					<activity android:name=".AppEntry" android:label="ANE Sample Intent Test">
+						<intent-filter>
+						    <action android:name="android.intent.action.SEND" />
+						    <category android:name="android.intent.category.DEFAULT" />
+						    <data android:mimeType="text/plain" />
+						</intent-filter> 
+						<intent-filter>
+						    <action android:name="com.speakaboos.android.intent.SHARE" />
+						    <category android:name="android.intent.category.DEFAULT" />
+						    <data android:scheme="intenttestair"/>
+						    <data android:mimeType="text/plain" />
+						</intent-filter> 
+					</activity>
+				</application>
+				
 				</application>
 			</manifest>
 			
