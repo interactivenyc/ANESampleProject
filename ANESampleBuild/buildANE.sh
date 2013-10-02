@@ -19,5 +19,7 @@ cp -r $nativedir/res Android-ARM
 
 "$adt" -package -target ane com.adobe.sampleasextension.SampleASExtension.ane extension.xml -swc ../ANESampleSWC/bin/ANESampleSWC.swc -platform Android-ARM -C Android-ARM . -platform default -C ../ANESampleSWC/bin .
 
+cp com.adobe.sampleasextension.SampleASExtension.ane ../TEST_AndroidAIR/libs_ane/
+
 #TO PACKAGE WITH CODE SIGNING
 #"$adt" -package -storetype PKCS12 -keystore cer.p12 -storepass password -target ane SampleASExtension.ane extension.xml -swc ../ANESample/bin/ANESample.swc -platform Android-ARM -C Android-ARM .

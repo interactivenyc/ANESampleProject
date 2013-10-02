@@ -3,7 +3,7 @@
 
 	<id>ANESampleTest</id>
 	<filename>ANESampleTest</filename>
-	<name>ANESampleTest</name>
+	<name>ANE_AirTest</name>
 	<versionNumber>0.0.0</versionNumber>
 	<initialWindow>
 		<content>ANESampleTest.swf</content>
@@ -16,11 +16,15 @@
 		<manifestAdditions><![CDATA[
 			<manifest android:installLocation="auto">
 			    <uses-permission android:name="android.permission.INTERNET"/>
+			    <application android:enabled="true" android:persistent="true">
 			    
-			    <application android:enabled="true" android:persistent="true"/>
-			    
-			    
-				
+					<activity android:name=".AppEntry">
+						<intent-filter>
+						    <action android:name="android.intent.action.MAIN" />
+						    <category android:name="android.intent.category.LAUNCHER" />
+						</intent-filter>
+		            </activity>
+				</application>
 			</manifest>
 			
 		]]></manifestAdditions>
@@ -41,13 +45,3 @@
     </extensions>
 </application>
 
-
-<!--
-<activity android:name=".AppEntry" android:label="ANESampleTest">
-	<intent-filter>
-	    <action android:name="com.speakaboos.android.intent.SHARE" />
-	    <category android:name="android.intent.category.DEFAULT" />
-	    <data android:mimeType="text/plain" />
-	</intent-filter> 
-</activity>
--->

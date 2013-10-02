@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Learning Java</string>
+    <string name="app_name">ANE AndroidTest</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send Text to Activity</string>
     <string name="button_intent">ACTION_SEND Intent</string>
