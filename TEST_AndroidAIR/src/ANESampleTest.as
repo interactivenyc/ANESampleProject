@@ -45,13 +45,17 @@ package
 		private var fs_ani:FileStream;
 		
 		
+		private var _ane:SampleASExtension;
+		private var _button1:MovieClip;
+		
+		
 		public function ANESampleTest()
 		{
 			super();
 			
 			log("CONSTRUCTOR");
 			
-			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.scaleMode = StageScaleMode.SHOW_ALL;
 			stage.align = StageAlign.TOP_LEFT;
 			stage.quality = StageQuality.MEDIUM; // .LOW; // .HIGH; //
 			stage.color = 0xcccccc;
@@ -61,8 +65,9 @@ package
 		
 		
 		private function start():void {
+			log("start")
 			
-			_bg = getFilledMC(800,600,0xFF6600);
+			_bg = getFilledMC(800,900,0xFF6600);
 			_bg.x = 10;
 			_bg.y = 10;
 			stage.addChild(_bg);
@@ -71,42 +76,30 @@ package
 			_console.wordWrap = true;
 			_console.multiline = true;
 			_console.width = 800;
-			_console.height = 600;
+			_console.height = 900;
 			_console.border = true;
 			_console.selectable = false;
 			_console.mouseEnabled = false;
 			_console.x = 10;
 			_console.y = 10;
-			//_console.type = TextFieldType.DYNAMIC;
-			
-			
-			
-			
 			_tf = _console.getTextFormat();
 			_tf.size = 24;
 			_tf.bold = true;
 			_tf.font = "_sans";
 			_console.setTextFormat(_tf);
-			
 			_console.text = "start";
-			
 			stage.addChild(_console);
 			
-			
-			var simpleButton:MovieClip = getTextButton("try this");
-			simpleButton.x = 820;
-			simpleButton.y = 10;
-			
-			simpleButton.addEventListener(MouseEvent.CLICK, testIntent);
-			
-			
-			stage.addChild(simpleButton);
+			_button1 = getTextButton("ShowVersion");
+			_button1.x = 830;
+			_button1.y = 10;
+			_button1.addEventListener(MouseEvent.CLICK, onMouseEvent);
+			stage.addChild(_button1);
 			
 			addEventListeners();
 			handleResize();
 			
-			//try to dismiss soft keyboard
-			stage.focus = simpleButton;
+			
 		}
 		
 		private function handleResize(e:Event = null) :void { 
@@ -121,11 +114,11 @@ package
 			log("***************************************");
 			log("handleResize(e)");
 			log("***************************************");
-			//			log("DEVICE_SCREEN: "+stage.stageWidth + " x " + stage.stageHeight);
-			//			log("ASPECT_RATIO: "+aspectRatio);
+						log("DEVICE_SCREEN: "+stage.stageWidth + " x " + stage.stageHeight);
+						log("ASPECT_RATIO: "+aspectRatio);
 			//			log("LEFT_EDGE: "+leftEdge);
 			//			log("VISIBLE_WIDTH: "+visibleWidth);
-			//			log("stageScale: "+stageScale);
+						log("stageScale: "+stageScale);
 			//			log("***************************************");
 			
 			
@@ -136,6 +129,10 @@ package
 			//			_console.x = -(leftEdge * stageScale);
 			//			_console.scaleX = stageScale;
 			//			_console.scaleY = stageScale;
+						
+			log("***************************************");
+			log("waiting for message from ANE...");
+			log("***************************************");
 			
 		}
 		
@@ -163,22 +160,44 @@ package
 		
 		private function addEventListeners():void{
 			stage.addEventListener(Event.RESIZE, handleResize);
+			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, handleActivate, false, 0, true);
-			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, handleDeactivate, false, 0, true);
-			NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, handleKeys, false, 0, true);
+//			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, handleActivate, false, 0, true);
+//			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, handleDeactivate, false, 0, true);
+//			NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, handleKeys, false, 0, true);
+			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE,onInvoke);
 		}
 		
-		private function testIntent(e:MouseEvent):void{
-			log("testIntent");
-			
-			var ane:SampleASExtension = new SampleASExtension();
-			ane.getVersion();
+		private function onAddedToStage(e:Event):void{
+			//try to dismiss soft keyboard
+			stage.focus = _button1;
+			_ane = new SampleASExtension();
 		}
 		
+		
+		
+		
+		
+		private function onMouseEvent(e:MouseEvent):void{
+			log("onMouseEvent: "+e.currentTarget);
+			switch(e.currentTarget){
+				case _button1:
+					testGetVersion();
+				default:
+						
+			}
+		}
+		
+		private function testGetVersion():void{
+			log("testANE");
+			_ane.getVersion();
+		}
+		
+		
+		//Catch Android Intents
 		
 		private function onInvoke(event:InvokeEvent):void{
-			log("onInvoke(event) "+event.type);
+			log("onInvoke(event) :: "+event.type);
 			
 			if(event.arguments && event.arguments.length){
 				var contentUri:String = event.arguments[0] as String;
@@ -201,24 +220,24 @@ package
 		
 		//Handle Android System Events
 		
-		private function handleActivate(event:Event):void{
-			log("handleActivate");
-			NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
-		}
-		
-		private function handleDeactivate(event:Event):void{
-			log("handleDeactivate");
-			NativeApplication.nativeApplication.exit();
-		}
-		
-		private function handleKeys(event:KeyboardEvent):void{
-			log("handleKeys event.keyCode: "+event.keyCode);
-			if(event.keyCode == Keyboard.BACK)
-				NativeApplication.nativeApplication.exit();
-		}
+//		private function handleActivate(event:Event):void{
+//			log("handleActivate");
+//			//NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
+//		}
+//		
+//		private function handleDeactivate(event:Event):void{
+//			log("handleDeactivate");
+//			//NativeApplication.nativeApplication.exit();
+//		}
+//		
+//		private function handleKeys(event:KeyboardEvent):void{
+//			log("handleKeys event.keyCode: "+event.keyCode);
+//			//if(event.keyCode == Keyboard.BACK)
+//				//NativeApplication.nativeApplication.exit();
+//		}
 		
 		private function log(msg:*):void{
-			trace("[ LOG ] " + msg);
+			trace("[ ANE_ST LOG ] " + msg);
 			try{
 				_console.text = "[ log ]  " + msg + "\r" + _console.text;
 				_console.setTextFormat(_tf);

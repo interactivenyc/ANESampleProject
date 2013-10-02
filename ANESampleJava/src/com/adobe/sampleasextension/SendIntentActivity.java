@@ -15,6 +15,8 @@ public class SendIntentActivity extends Activity {
 	        String action = intent.getAction();
 	        String type = intent.getType();
 	        
+	        log(action);
+	        log(type);
 	        
 
 	        //if (Intent.ACTION_SEND.equals(action) && type != null) {            
@@ -23,7 +25,7 @@ public class SendIntentActivity extends Activity {
 		}
 	 
 		 protected void handleSend(Intent intent){
-			 log("SendIntentActivity.onCreate");
+			 log("SendIntentActivity.handleSend");
 		 }
 
 

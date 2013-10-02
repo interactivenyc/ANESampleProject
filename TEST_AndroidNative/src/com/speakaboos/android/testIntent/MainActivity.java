@@ -50,17 +50,30 @@ public class MainActivity extends Activity {
 	
 	public void sendIntent(View view){
 		log("sendIntent");
-		
-		Intent sendIntent = new Intent();
-		sendIntent.setAction(Intent.ACTION_SEND);
-		sendIntent.putExtra(Intent.EXTRA_TEXT, "This is extra text to send.");
-		sendIntent.addCategory("android.intent.category.DEFAULT");
+		sendExplicitIntentToANE();
+//		Intent sendIntent = new Intent();
+//		sendIntent.setAction(Intent.ACTION_SEND);
+//		sendIntent.putExtra(Intent.EXTRA_TEXT, "This is extra text to send.");
+//		sendIntent.addCategory("android.intent.category.DEFAULT");
+//		sendIntent.setType("text/plain");
+//		
+//		log("intentAvailable: "+ isIntentAvailable(this, sendIntent));
+//		
+//		startActivity(sendIntent);
+		//startActivity(Intent.createChooser(sendIntent, "Testing Intent Chooser."));
+	}
+	
+	public void sendExplicitIntentToANE(){
+		Intent sendIntent = new Intent("com.adobe.sampleasextension.SampleASExtension");
+		sendIntent.putExtra("extra1", "This is extra text to send -1.");
+		sendIntent.putExtra("extra2", "This is extra text to send -2.");
+		//sendIntent.addCategory("android.intent.category.DEFAULT");
 		sendIntent.setType("text/plain");
 		
 		log("intentAvailable: "+ isIntentAvailable(this, sendIntent));
 		
-		startActivity(sendIntent);
-		//startActivity(Intent.createChooser(sendIntent, "Testing Intent Chooser."));
+		//startActivityForResult(sendIntent, REQUEST_CODE);
+		startActivity(Intent.createChooser(sendIntent, "Testing Intent Chooser."));
 	}
 	
 	public void sendExplicitIntent(View view){
@@ -88,7 +101,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void log(String msg){
-		System.out.println(msg);
+		System.out.println("[ MainActivity ] "+msg);
 	}
 
 }

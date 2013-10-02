@@ -1,9 +1,7 @@
 package com.adobe.sampleasextension;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 
 public class IntentActivity extends Activity {
 
@@ -14,8 +12,8 @@ public class IntentActivity extends Activity {
 		log("IntentActivity onCreate");
 		
 		 // Get the message from the intent
-	    Intent intent = getIntent();
-	    String message = intent.getType();
+	    //Intent intent = getIntent();
+	    //String message = intent.getType();
 	}
 
 //	@Override

@@ -12,11 +12,16 @@ package com.adobe.sampleasextension
 				trace("Creating extension context.");
 				extContext = ExtensionContext.createExtensionContext
 					("com.adobe.sampleasextension","SampleASExtension");
-				if (extContext)
-					extContext.call("initMe");
-				else
+				if (extContext){
+					initMe();
+				}else{
 					trace("Failed to create extension context.");
+				}
 			}
+		}
+		
+		public function initMe():void {
+			extContext.call("initMe");
 		}
 		
 		public function getVersion():void {
