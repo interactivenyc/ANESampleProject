@@ -11,6 +11,8 @@ public class SendIntentActivity extends Activity {
 	        super.onCreate(savedInstanceState);
 	        log("SendIntentActivity.onCreate");
 	        
+	        //setContentView(R.layout.activity_send_intent);
+	        
 	        Intent intent = getIntent();
 	        String action = intent.getAction();
 	        String type = intent.getType();

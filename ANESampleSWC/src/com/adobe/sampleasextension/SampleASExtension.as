@@ -7,15 +7,15 @@ package com.adobe.sampleasextension
 		private static var extContext:ExtensionContext = null;
 		
 		public function SampleASExtension() {
-			trace("in SampleASExtension Constructor");
+			log("CONSTRUCTOR");
 			if (!extContext) {
-				trace("Creating extension context.");
+				log("Creating extension context.");
 				extContext = ExtensionContext.createExtensionContext
 					("com.adobe.sampleasextension","SampleASExtension");
 				if (extContext){
 					initMe();
 				}else{
-					trace("Failed to create extension context.");
+					log("Failed to create extension context.");
 				}
 			}
 		}
@@ -29,7 +29,11 @@ package com.adobe.sampleasextension
 		}
 		
 		public function showBrowser():void {
-			extContext.call("showBrowser");
+			extContext.call("showBrowsers");
+		}
+		
+		private function log(msg:*):void{
+			trace("[ SampleASExtension ] " + msg);
 		}
 	}
 }

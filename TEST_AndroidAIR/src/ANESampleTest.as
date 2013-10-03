@@ -237,12 +237,12 @@ package
 //		}
 		
 		private function log(msg:*):void{
-			trace("[ ANE_ST LOG ] " + msg);
+			trace("[ AIRTest ] " + msg);
 			try{
 				_console.text = "[ log ]  " + msg + "\r" + _console.text;
 				_console.setTextFormat(_tf);
 			}catch(e:Error){
-				trace("log error");
+				trace("log error :: "+e.message);
 			}
 		}
 	}

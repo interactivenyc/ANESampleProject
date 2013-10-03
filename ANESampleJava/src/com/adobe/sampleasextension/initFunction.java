@@ -7,7 +7,11 @@ import com.adobe.fre.FREObject;
 public class initFunction implements FREFunction  {
 	public FREObject call(FREContext ctx, FREObject[] passedArgs) {
 
-		System.out.println("initFunction successfully called.");
+		log("initFunction successfully called.");
 		return null;
+	}
+	
+	public void log(String msg){
+		System.out.println("[ initFunction.java ] "+msg);
 	}
 }

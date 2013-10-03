@@ -10,6 +10,8 @@ public class DisplayMessageActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    
+	    log("CONSTRUCTOR");
 
 	    // Get the message from the intent
 	    Intent intent = getIntent();
@@ -22,6 +24,10 @@ public class DisplayMessageActivity extends Activity {
 
 	    // Set the text view as the activity layout
 	    setContentView(textView);
+	}
+	
+	public void log(String msg){
+		System.out.println("[ DisplayMessageActivity ] "+msg);
 	}
 
 //	/**

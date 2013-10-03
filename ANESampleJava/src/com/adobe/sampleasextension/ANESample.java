@@ -13,6 +13,7 @@ public class ANESample implements FREExtension
 	 * from the actionscript code.
 	 */
 	public FREContext createContext(String extId) {	
+		log("CONSTRUCTOR");
 		return new ANESampleContext();
 	}
 	
@@ -29,5 +30,9 @@ public class ANESample implements FREExtension
  	 * Extension initialization.
  	 */  
 	public void initialize( ) {
+	}
+	
+	public void log(String msg){
+		System.out.println("[ ANESample.java ] "+msg);
 	}
 }

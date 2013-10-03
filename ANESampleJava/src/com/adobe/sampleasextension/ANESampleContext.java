@@ -17,6 +17,7 @@ public class ANESampleContext extends FREContext
 
 	@Override
 	public Map<String, FREFunction> getFunctions() {
+		log("creating map");
 
 		Map<String, FREFunction> functionMap = new HashMap<String, FREFunction>();
 		functionMap.put("getVersion", new getVersion() );
@@ -25,5 +26,9 @@ public class ANESampleContext extends FREContext
 		functionMap.put("initMe", new initFunction() );
 
 		return functionMap;
+	}
+	
+	public void log(String msg){
+		System.out.println("[ ANESampleContext ] "+msg);
 	}
 }
