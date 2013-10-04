@@ -11,19 +11,24 @@ public class SendIntentActivity extends Activity {
 	        super.onCreate(savedInstanceState);
 	        log("SendIntentActivity.onCreate");
 	        
-	        //setContentView(R.layout.activity_send_intent);
+	        setContentView(R.layout.activity_send_intent);
 	        
 	        Intent intent = getIntent();
+
+	        //CAN'T TARGET TEXT FIELD THIS WAY...
+//	        EditText editText = (EditText) findViewById(R.id.text_view);
+//	        editText.setText("SendIntentActivity");
+	        
 	        String action = intent.getAction();
 	        String type = intent.getType();
 	        
-	        log(action);
-	        log(type);
+	        log("action :: "+action);
+	        log("type :: "+type);
 	        
 
-	        //if (Intent.ACTION_SEND.equals(action) && type != null) {            
+	        if (Intent.ACTION_SEND.equals(action) && type != null) {            
 	            this.handleSend(intent);
-	        //}
+	        }
 		}
 	 
 		 protected void handleSend(Intent intent){

@@ -33,7 +33,7 @@
 			     	<!-- When android:name=".SendIntentActivity" to try to pass it to the ANE -->
 			     	<!-- The intent is available from MainActivity, but it crashes the app -->
 		            
-		            <activity android:name=".AppEntry" android:label="AppEntry" android:exported="true">
+		            <activity android:name="com.adobe.sampleasextension.SendIntentActivity" android:label="AppEntry" android:exported="true">
 						<intent-filter>
 						    <action android:name="com.speakaboos.android.intent.SHARE" />
 						    <category android:name="android.intent.category.DEFAULT" />
