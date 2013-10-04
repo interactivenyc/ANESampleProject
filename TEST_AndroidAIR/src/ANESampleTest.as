@@ -4,7 +4,6 @@ package
 	import com.adobe.sampleasextension.SampleASExtension;
 	
 	import flash.desktop.NativeApplication;
-	import flash.desktop.SystemIdleMode;
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -13,14 +12,15 @@ package
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.InvokeEvent;
-	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.events.StatusEvent;
+	import flash.external.ExtensionContext;
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
+	import flash.system.Security;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	import flash.ui.Keyboard;
 	
 	[SWF(width=1600,height=900)]
 	public class ANESampleTest extends Sprite
@@ -46,7 +46,10 @@ package
 		
 		
 		private var _ane:SampleASExtension;
+		private var _aneContext:ExtensionContext;
 		private var _button1:MovieClip;
+		private var _button2:MovieClip;
+		private var _button3:MovieClip;
 		
 		
 		public function ANESampleTest()
@@ -96,10 +99,54 @@ package
 			_button1.addEventListener(MouseEvent.CLICK, onMouseEvent);
 			stage.addChild(_button1);
 			
+			_button2 = getTextButton("dispatchANEEvent");
+			_button2.x = 830;
+			_button2.y = 110;
+			_button2.addEventListener(MouseEvent.CLICK, onMouseEvent);
+			stage.addChild(_button2);
+			
+			_button3 = getTextButton("ane.dispatchEvent(ANEEvent)");
+			_button3.x = 830;
+			_button3.y = 210;
+			_button3.addEventListener(MouseEvent.CLICK, onMouseEvent);
+			stage.addChild(_button3);
+			
 			addEventListeners();
 			handleResize();
+		}
+		
+		private function addEventListeners():void{
+			stage.addEventListener(Event.RESIZE, handleResize);
+			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE,onInvoke);
 			
+			//NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, handleActivate, false, 0, true);
+			//NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, handleDeactivate, false, 0, true);
+			//NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, handleKeys, false, 0, true);
+		}
+		
+		private function onAddedToStage(e:Event):void{
+			//try to dismiss soft keyboard
+			stage.focus = _button1;
+			initializeANE()
 			
+		}
+		
+		
+		private function onMouseEvent(e:MouseEvent):void{
+			log("onMouseEvent: "+e.currentTarget);
+			switch(e.currentTarget){
+				case _button1:
+					_ane.getVersion();
+					break;
+				case _button2:
+					_ane.dispatchANEEvent();
+					break;
+				case _button3:
+					_ane.dispatchEvent(new Event("ANEEvent"));
+				default:
+					
+			}
 		}
 		
 		private function handleResize(e:Event = null) :void { 
@@ -114,22 +161,9 @@ package
 			log("***************************************");
 			log("handleResize(e)");
 			log("***************************************");
-						log("DEVICE_SCREEN: "+stage.stageWidth + " x " + stage.stageHeight);
-						log("ASPECT_RATIO: "+aspectRatio);
-			//			log("LEFT_EDGE: "+leftEdge);
-			//			log("VISIBLE_WIDTH: "+visibleWidth);
-						log("stageScale: "+stageScale);
-			//			log("***************************************");
-			
-			
-			//			_bg.x = -(leftEdge * stageScale);
-			//			_bg.scaleX = stageScale;
-			//			_bg.scaleY = stageScale;
-			//			
-			//			_console.x = -(leftEdge * stageScale);
-			//			_console.scaleX = stageScale;
-			//			_console.scaleY = stageScale;
-						
+					log("DEVICE_SCREEN: "+stage.stageWidth + " x " + stage.stageHeight);
+					log("ASPECT_RATIO: "+aspectRatio);
+					log("stageScale: "+stageScale);
 			log("***************************************");
 			log("waiting for message from ANE...");
 			log("***************************************");
@@ -158,49 +192,45 @@ package
 			return button;
 		}
 		
-		private function addEventListeners():void{
-			stage.addEventListener(Event.RESIZE, handleResize);
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			
-//			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, handleActivate, false, 0, true);
-//			NativeApplication.nativeApplication.addEventListener(Event.DEACTIVATE, handleDeactivate, false, 0, true);
-//			NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, handleKeys, false, 0, true);
-			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE,onInvoke);
-		}
 		
-		private function onAddedToStage(e:Event):void{
-			//try to dismiss soft keyboard
-			stage.focus = _button1;
+		private function initializeANE():void{
+			log("initializeANE");
 			_ane = new SampleASExtension();
-		}
-		
-		
-		
-		
-		
-		private function onMouseEvent(e:MouseEvent):void{
-			log("onMouseEvent: "+e.currentTarget);
-			switch(e.currentTarget){
-				case _button1:
-					testGetVersion();
-				default:
-						
+			
+			//this may not be the listener that works
+			_ane.addEventListener("ANEEvent", handleANEEvent);
+			
+			//FROM: http://stackoverflow.com/questions/16224373/dispatching-events-in-ane
+			try {
+				_aneContext = ExtensionContext.createExtensionContext("com.adobe.sampleasextension", "");
+				_ane.addEventListener(StatusEvent.STATUS,statusHandle);
+				requestEvent();
+			}catch (e:Error){
+				log("initializeANE error: "+e.message);
 			}
 		}
 		
-		private function testGetVersion():void{
-			log("testANE");
-			_ane.getVersion();
+		private function handleANEEvent(e:Event):void{
+			log("handleANEEvent type: "+e.type);
+			
 		}
 		
+		
+		// listener function
+		public function statusHandle(event:StatusEvent):void{
+			log("statusHandle event: "+event);
+			// process event data
+		}
+		
+		public function requestEvent():void{
+			_aneContext.call("dispatchANEEvent");
+		}
 		
 		//Catch Android Intents
 		
 		private function onInvoke(event:InvokeEvent):void{
 			log("onInvoke(event) event.type :: "+event.type);
 			log("onInvoke(event) event.arguments :: "+event.arguments);
-//			log("onInvoke(event) event.reason :: "+event.reason);
-//			log("onInvoke(event) event.toString :: "+event.toString());
 			
 			if(event.arguments && event.arguments.length){
 				var contentUri:String = event.arguments[0] as String;
@@ -220,9 +250,7 @@ package
 			file_ani = null;
 			fs_ani = null;
 		}
-		
-		//Handle Android System Events
-		
+				
 //		private function handleActivate(event:Event):void{
 //			log("handleActivate");
 //			//NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;

@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void sendExplicitIntent(View view){
-		Intent sendIntent = new Intent("com.speakaboos.android.intent.SHARE");
+		Intent sendIntent = new Intent("com.speakaboos.android.intent.CUSTOM_INTENT");
 		sendIntent.putExtra("extra1", "This is extra text to send -1.");
 		sendIntent.putExtra("extra2", "This is extra text to send -2.");
 		//sendIntent.addCategory("android.intent.category.DEFAULT");

@@ -1,5 +1,7 @@
 package com.adobe.sampleasextension;
 
+import com.adobe.fre.FREContext;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,21 +16,12 @@ public class SendIntentActivity extends Activity {
 	        setContentView(R.layout.activity_send_intent);
 	        
 	        Intent intent = getIntent();
-
-	        //CAN'T TARGET TEXT FIELD THIS WAY...
-//	        EditText editText = (EditText) findViewById(R.id.text_view);
-//	        editText.setText("SendIntentActivity");
 	        
 	        String action = intent.getAction();
 	        String type = intent.getType();
 	        
 	        log("action :: "+action);
 	        log("type :: "+type);
-	        
-
-	        if (Intent.ACTION_SEND.equals(action) && type != null) {            
-	            this.handleSend(intent);
-	        }
 		}
 	 
 		 protected void handleSend(Intent intent){

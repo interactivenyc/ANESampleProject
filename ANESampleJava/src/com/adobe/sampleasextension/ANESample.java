@@ -12,9 +12,12 @@ public class ANESample implements FREExtension
 	 * Creates a new instance of ANESampleContext when the context is created 
 	 * from the actionscript code.
 	 */
+	
+	public static FREContext context;
+	
 	public FREContext createContext(String extId) {	
 		log("CONSTRUCTOR");
-		return new ANESampleContext();
+		return context = new ANESampleContext();
 	}
 	
 	/*

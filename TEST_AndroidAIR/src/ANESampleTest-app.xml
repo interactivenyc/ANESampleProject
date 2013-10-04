@@ -35,7 +35,7 @@
 		            
 		            <activity android:name="com.adobe.sampleasextension.SendIntentActivity" android:label="AppEntry" android:exported="true">
 						<intent-filter>
-						    <action android:name="com.speakaboos.android.intent.SHARE" />
+						    <action android:name="com.speakaboos.android.intent.CUSTOM_INTENT" />
 						    <category android:name="android.intent.category.DEFAULT" />
 						    <data android:mimeType="text/plain" />
 						</intent-filter> 

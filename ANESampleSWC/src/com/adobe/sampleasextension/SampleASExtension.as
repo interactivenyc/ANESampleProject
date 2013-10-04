@@ -1,10 +1,13 @@
 package com.adobe.sampleasextension
 {
-	import flash.external.ExtensionContext;	
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
+	import flash.external.ExtensionContext;
+	import flash.system.Security;
 	
-	public class SampleASExtension
+	public class SampleASExtension extends EventDispatcher
 	{
-		private static var extContext:ExtensionContext = null;
+		public static var extContext:ExtensionContext = null;
 		
 		public function SampleASExtension() {
 			log("CONSTRUCTOR");
@@ -29,7 +32,11 @@ package com.adobe.sampleasextension
 		}
 		
 		public function showBrowser():void {
-			extContext.call("showBrowsers");
+			extContext.call("showBrowser");
+		}
+		
+		public function dispatchANEEvent():void{
+			extContext.call("dispatchANEEvent");
 		}
 		
 		private function log(msg:*):void{

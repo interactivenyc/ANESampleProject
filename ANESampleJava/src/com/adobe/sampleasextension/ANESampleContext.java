@@ -11,6 +11,7 @@ import com.adobe.fre.FREFunction;
 
 public class ANESampleContext extends FREContext 
 {
+	
 	@Override
 	public void dispose() {
 	}
@@ -22,11 +23,12 @@ public class ANESampleContext extends FREContext
 		Map<String, FREFunction> functionMap = new HashMap<String, FREFunction>();
 		functionMap.put("getVersion", new getVersion() );
 		functionMap.put("showBrowser", new showBrowser() );
-		functionMap.put("sendIntent", new sendIntent() );
+		functionMap.put("dispatchANEEvent", new dispatchANEEvent() );
 		functionMap.put("initMe", new initFunction() );
 
 		return functionMap;
 	}
+	
 	
 	public void log(String msg){
 		System.out.println("[ ANESampleContext ] "+msg);
