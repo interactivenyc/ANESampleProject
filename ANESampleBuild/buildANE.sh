@@ -5,7 +5,7 @@ echo "********************************************************************"
 echo " - creating ANE package"
 
 rm -rf Android-ARM/*
-rm -f SampleASExtension.ane library.swf
+rm -f com.adobe.sampleasextension.SampleASExtension.ane library.swf
 mkdir -p Android-ARM
 
 unzip ../ANESampleSWC/bin/ANESampleSWC.swc library.swf
@@ -20,6 +20,7 @@ cp -r $nativedir/res Android-ARM
 "$adt" -package -target ane com.adobe.sampleasextension.SampleASExtension.ane extension.xml -swc ../ANESampleSWC/bin/ANESampleSWC.swc -platform Android-ARM -C Android-ARM . -platform default -C ../ANESampleSWC/bin .
 
 cp com.adobe.sampleasextension.SampleASExtension.ane ../TEST_AndroidAIR/libs_ane/
+cp ../ANESampleSWC/bin/ANESampleSWC.swc ../TEST_AndroidAIR/libs/ANESampleSWC.swc
 
 #TO PACKAGE WITH CODE SIGNING
 #"$adt" -package -storetype PKCS12 -keystore cer.p12 -storepass password -target ane SampleASExtension.ane extension.xml -swc ../ANESample/bin/ANESample.swc -platform Android-ARM -C Android-ARM .
