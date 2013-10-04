@@ -1,1 +1,5 @@
 .DS_Store
+ANESampleJava/bin
+ANESampleJava/ANESample.jar
+ANESampleBuild/com.adobe.sampleasextension.SampleASExtension.ane
+ANESampleBuild/Android-ARM/ANESample.jar
