@@ -3,3 +3,9 @@ ANESampleJava/bin
 ANESampleJava/ANESample.jar
 ANESampleBuild/com.adobe.sampleasextension.SampleASExtension.ane
 ANESampleBuild/Android-ARM/ANESample.jar
+.actionScriptProperties
+.flexLibProperties
+.project
+.settings
+ANESampleSWC/bin
+TEST_AndroidAIR/deploy
