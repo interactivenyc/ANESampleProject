@@ -9,3 +9,4 @@ ANESampleBuild/Android-ARM/ANESample.jar
 .settings
 ANESampleSWC/bin
 TEST_AndroidAIR/deploy
+ANESampleBuild/Android-ARM/
