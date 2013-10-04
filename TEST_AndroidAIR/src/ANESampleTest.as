@@ -197,7 +197,10 @@ package
 		//Catch Android Intents
 		
 		private function onInvoke(event:InvokeEvent):void{
-			log("onInvoke(event) :: "+event.type);
+			log("onInvoke(event) event.type :: "+event.type);
+			log("onInvoke(event) event.arguments :: "+event.arguments);
+//			log("onInvoke(event) event.reason :: "+event.reason);
+//			log("onInvoke(event) event.toString :: "+event.toString());
 			
 			if(event.arguments && event.arguments.length){
 				var contentUri:String = event.arguments[0] as String;

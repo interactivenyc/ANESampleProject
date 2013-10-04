@@ -12,13 +12,25 @@
         android:label="@string/app_name"
         android:allowBackup="true">
         
-        <activity android:name=".SendIntentActivity" android:label="SendIntentActivity">
+        <!-- 
+        	I was looking at an error in LogCat: Permission Denied: checkComponentPermission() and this article came up:
+        	http://stackoverflow.com/questions/6984583/warn-activitymanager5038-permission-denied-checkcomponentpermission
+        	Haven't tried it, though I put the android:exported="true" into my activity tag, as someone else suggested.
+        <receiver android:name=".SendIntentActivity" android:exported="true"></receiver>
+         -->
+         
+        <activity android:name=".SendIntentActivity" android:label="SendIntentActivity" android:exported="true">
 			<intent-filter>
 			    <action android:name="com.speakaboos.android.intent.SHARE" />
 			    <category android:name="android.intent.category.DEFAULT" />
 			    <data android:mimeType="text/plain" />
 			</intent-filter> 
 		</activity>
+		
+		<intent-filter>
+		    <action android:name="android.intent.action.MAIN" />
+		    <category android:name="android.intent.category.LAUNCHER" />
+		</intent-filter>
         
         
 	</application>

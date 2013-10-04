@@ -4,12 +4,17 @@
 .project
 .settings
 
-ANESampleSWC/bin
-
-ANESampleJava/bin
-ANESampleJava/ANESample.jar
+# THESE ARE THE GENERATED FILES FOR THIS PROJECT
 
 ANESampleBuild/Android-ARM/
 ANESampleBuild/com.adobe.sampleasextension.SampleASExtension.ane
+ANESampleBuild/library.swf
 
-TEST_AndroidAIR/deploy
+ANESampleJava/ANESample.jar
+ANESampleJava/bin/
+
+ANESampleSWC/bin/
+
+TEST_AndroidAIR/deploy/
+TEST_AndroidAIR/libs/ANESampleSWC.swc
+TEST_AndroidAIR/libs_ane/

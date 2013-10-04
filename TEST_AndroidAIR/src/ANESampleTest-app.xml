@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/3.8">
+<application xmlns="http://ns.adobe.com/air/application/3.9">
 
 	<id>ANESampleTest</id>
 	<filename>ANESampleTest</filename>
@@ -12,19 +12,34 @@
 		<fullScreen>true</fullScreen>
 		<visible>true</visible>
 	</initialWindow>
+	
+	
 	<android>
+     
 		<manifestAdditions><![CDATA[
 			<manifest android:installLocation="auto">
 			    <uses-permission android:name="android.permission.INTERNET"/>
 			    <application android:enabled="true" android:persistent="true">
 			    
-					<activity android:name=".AppEntry">
+					<activity>
 						<intent-filter>
 						    <action android:name="android.intent.action.MAIN" />
 						    <category android:name="android.intent.category.LAUNCHER" />
 						</intent-filter>
 		            </activity>
 		            
+		            <!-- This intent is being received here when activity android:name=".AppEntry" -->
+			     	<!-- But all it does is call INVOKE in ANESampleTest.as -->
+			     	<!-- When android:name=".SendIntentActivity" to try to pass it to the ANE -->
+			     	<!-- The intent is available from MainActivity, but it crashes the app -->
+		            
+		            <activity android:name=".AppEntry" android:label="AppEntry" android:exported="true">
+						<intent-filter>
+						    <action android:name="com.speakaboos.android.intent.SHARE" />
+						    <category android:name="android.intent.category.DEFAULT" />
+						    <data android:mimeType="text/plain" />
+						</intent-filter> 
+					</activity>
 		            
 				</application>
 			</manifest>
