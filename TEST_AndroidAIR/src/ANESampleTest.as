@@ -18,7 +18,6 @@ package
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
-	import flash.system.Security;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
@@ -105,11 +104,11 @@ package
 			_button2.addEventListener(MouseEvent.CLICK, onMouseEvent);
 			stage.addChild(_button2);
 			
-			_button3 = getTextButton("ane.dispatchEvent(ANEEvent)");
-			_button3.x = 830;
-			_button3.y = 210;
-			_button3.addEventListener(MouseEvent.CLICK, onMouseEvent);
-			stage.addChild(_button3);
+//			_button3 = getTextButton("ane.dispatchEvent(ANEEvent)");
+//			_button3.x = 830;
+//			_button3.y = 210;
+//			_button3.addEventListener(MouseEvent.CLICK, onMouseEvent);
+//			stage.addChild(_button3);
 			
 			addEventListeners();
 			handleResize();
@@ -134,7 +133,7 @@ package
 		
 		
 		private function onMouseEvent(e:MouseEvent):void{
-			log("onMouseEvent: "+e.currentTarget);
+			//log("onMouseEvent: "+e.currentTarget);
 			switch(e.currentTarget){
 				case _button1:
 					_ane.getVersion();
@@ -143,7 +142,7 @@ package
 					_ane.dispatchANEEvent();
 					break;
 				case _button3:
-					_ane.dispatchEvent(new Event("ANEEvent"));
+					break;
 				default:
 					
 			}
@@ -173,7 +172,6 @@ package
 		
 		
 		public function getFilledMC(w:Number,h:Number,color:Number = 0x0000FF):MovieClip {
-			log("getFilledRect()");
 			var mc:MovieClip = new MovieClip();
 			var rect:Shape = new Shape();
 			rect.graphics.beginFill(color);
@@ -197,28 +195,23 @@ package
 			log("initializeANE");
 			_ane = new SampleASExtension();
 			
-			//this may not be the listener that works
-			_ane.addEventListener("ANEEvent", handleANEEvent);
-			
-			//FROM: http://stackoverflow.com/questions/16224373/dispatching-events-in-ane
 			try {
-				_aneContext = ExtensionContext.createExtensionContext("com.adobe.sampleasextension", "");
-				_ane.addEventListener(StatusEvent.STATUS,statusHandle);
-				requestEvent();
+				_aneContext = ExtensionContext(_ane.getContext());
+				_aneContext.addEventListener(StatusEvent.STATUS,statusHandle);
 			}catch (e:Error){
 				log("initializeANE error: "+e.message);
 			}
 		}
 		
-		private function handleANEEvent(e:Event):void{
-			log("handleANEEvent type: "+e.type);
-			
-		}
-		
 		
 		// listener function
 		public function statusHandle(event:StatusEvent):void{
-			log("statusHandle event: "+event);
+			//log("statusHandle event: "+event);
+			log("***************************************");
+			log("statusHandle event.type: "+event.type);
+			log("statusHandle event.code: "+event.code);
+			log("statusHandle event.level: "+event.level);
+			log("***************************************");
 			// process event data
 		}
 		
@@ -229,12 +222,12 @@ package
 		//Catch Android Intents
 		
 		private function onInvoke(event:InvokeEvent):void{
-			log("onInvoke(event) event.type :: "+event.type);
-			log("onInvoke(event) event.arguments :: "+event.arguments);
+			log("onInvoke(event) event.type: "+event.type);
+			log("onInvoke(event) event.arguments: "+event.arguments);
 			
 			if(event.arguments && event.arguments.length){
 				var contentUri:String = event.arguments[0] as String;
-				//log("Content:", contentUri);
+				if (contentUri) log("Content:" + contentUri);
 				file_ani = new File(contentUri);
 				fs_ani = new FileStream();
 				fs_ani.openAsync(file_ani, FileMode.READ);
@@ -270,10 +263,11 @@ package
 		private function log(msg:*):void{
 			trace("[ AIRTest ] " + msg);
 			try{
-				_console.text = "[ log ]  " + msg + "\r" + _console.text;
+				_console.text = _console.text + "\r" + msg ;
 				_console.setTextFormat(_tf);
+				_console.scrollV = _console.maxScrollV;
 			}catch(e:Error){
-				trace("log error :: "+e.message);
+				//trace("log error :: "+e.message);
 			}
 		}
 	}

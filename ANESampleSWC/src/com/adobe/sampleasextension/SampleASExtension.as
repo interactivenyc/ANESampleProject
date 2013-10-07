@@ -1,9 +1,8 @@
 package com.adobe.sampleasextension
 {
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
-	import flash.system.Security;
 	
 	public class SampleASExtension extends EventDispatcher
 	{
@@ -11,12 +10,14 @@ package com.adobe.sampleasextension
 		
 		public function SampleASExtension() {
 			log("CONSTRUCTOR");
+			//try {Security.allowDomain("*");}catch (e) { };
 			if (!extContext) {
 				log("Creating extension context.");
-				extContext = ExtensionContext.createExtensionContext
-					("com.adobe.sampleasextension","SampleASExtension");
+				extContext = ExtensionContext.createExtensionContext("com.adobe.sampleasextension", "");
+				extContext.addEventListener(StatusEvent.STATUS, statusHandle);
 				if (extContext){
 					initMe();
+					
 				}else{
 					log("Failed to create extension context.");
 				}
@@ -24,6 +25,7 @@ package com.adobe.sampleasextension
 		}
 		
 		public function initMe():void {
+			log("initMe");
 			extContext.call("initMe");
 		}
 		
@@ -31,12 +33,23 @@ package com.adobe.sampleasextension
 			extContext.call("getVersion");
 		}
 		
+		public function getContext():ExtensionContext {
+			log("getContext");
+			return extContext;
+		}
+		
 		public function showBrowser():void {
 			extContext.call("showBrowser");
 		}
 		
 		public function dispatchANEEvent():void{
+			log("dispatchANEEvent");
 			extContext.call("dispatchANEEvent");
+		}
+		
+		public function statusHandle(e:StatusEvent):void{
+			log("statusHandle e.type: "+e.type);
+			dispatchEvent(e);
 		}
 		
 		private function log(msg:*):void{

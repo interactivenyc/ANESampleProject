@@ -24,6 +24,7 @@ public class ANESampleContext extends FREContext
 		functionMap.put("getVersion", new getVersion() );
 		functionMap.put("showBrowser", new showBrowser() );
 		functionMap.put("dispatchANEEvent", new dispatchANEEvent() );
+		functionMap.put("getContext", new getContext() );
 		functionMap.put("initMe", new initFunction() );
 
 		return functionMap;

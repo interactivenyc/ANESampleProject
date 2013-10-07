@@ -1,7 +1,5 @@
 package com.adobe.sampleasextension;
 
-import com.adobe.fre.FREContext;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

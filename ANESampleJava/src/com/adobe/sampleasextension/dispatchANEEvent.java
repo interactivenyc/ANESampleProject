@@ -10,10 +10,13 @@ public class dispatchANEEvent implements FREFunction {
     public FREObject call(FREContext context, FREObject[] args) {
 
 		log("dispatchANEEvent");
-	
-		FREContext ctxt = ANESample.context;
-		ctxt.dispatchStatusEventAsync("ANEEvent", "some data?");
-
+		
+		try{
+			context.dispatchStatusEventAsync("ANEEvent", "some data?");
+		}catch(Error e){
+			log("Error: "+e.getMessage());
+		}
+		
    
 		return null;
     }
