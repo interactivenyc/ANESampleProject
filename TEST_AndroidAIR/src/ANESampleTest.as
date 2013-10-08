@@ -208,9 +208,21 @@ package
 		public function statusHandle(event:StatusEvent):void{
 			//log("statusHandle event: "+event);
 			log("***************************************");
+			log(new Date());
 			log("statusHandle event.type: "+event.type);
 			log("statusHandle event.code: "+event.code);
 			log("statusHandle event.level: "+event.level);
+			
+			try{
+				for(var prop:String in _aneContext){
+					log("prop: " + prop + " :: " +_aneContext[prop]);
+				}
+				var bundleData:* = _ane.getBundleData();
+				log("BUNDLE DATA: "+bundleData);
+			}catch(e:Error){
+				log("Cannot Read BUNDLE DATA");
+				log(e.message);
+			}
 			log("***************************************");
 			// process event data
 		}

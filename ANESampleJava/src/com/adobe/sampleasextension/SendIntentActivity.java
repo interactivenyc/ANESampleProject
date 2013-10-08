@@ -9,17 +9,23 @@ public class SendIntentActivity extends Activity {
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        log("SendIntentActivity.onCreate");
+	        log("SendIntentActivity.onCreate...");
 	        
-	        setContentView(R.layout.activity_send_intent);
+	        //setContentView(R.layout.activity_send_intent);
 	        
 	        Intent intent = getIntent();
 	        
 	        String action = intent.getAction();
 	        String type = intent.getType();
+	        Bundle bundleData = intent.getExtras();
 	        
-	        log("action :: "+action);
-	        log("type :: "+type);
+	        log("action ::: "+action);
+	        log("type ::: "+type);
+	        log("extras ::: "+bundleData.getString("extra1"));
+	        
+	        ANESampleContext context = ANESample.context;
+	        context.bundleData = bundleData;
+	        context.dispatchStatusEventAsync(action, type);
 		}
 	 
 		 protected void handleSend(Intent intent){

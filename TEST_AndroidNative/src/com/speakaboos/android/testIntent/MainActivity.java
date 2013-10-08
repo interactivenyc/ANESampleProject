@@ -79,15 +79,15 @@ public class MainActivity extends Activity {
 	
 	public void sendExplicitIntent(View view){
 		Intent sendIntent = new Intent("com.speakaboos.android.intent.CUSTOM_INTENT");
-		sendIntent.putExtra("extra1", "This is extra text to send -1.");
-		sendIntent.putExtra("extra2", "This is extra text to send -2.");
+		sendIntent.putExtra("id", "kyowon");
+		sendIntent.putExtra("group", "1");
 		//sendIntent.addCategory("android.intent.category.DEFAULT");
 		sendIntent.setType("text/plain");
 		
 		log("intentAvailable: "+ isIntentAvailable(this, sendIntent));
 		
-		//startActivityForResult(sendIntent, REQUEST_CODE);
-		startActivity(Intent.createChooser(sendIntent, "Testing Intent Chooser."));
+		startActivityForResult(sendIntent, 0);
+		//startActivity(Intent.createChooser(sendIntent, "Testing Intent Chooser."));
 	}
 	
 	@Override

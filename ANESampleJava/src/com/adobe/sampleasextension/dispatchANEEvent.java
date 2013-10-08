@@ -12,7 +12,7 @@ public class dispatchANEEvent implements FREFunction {
 		log("dispatchANEEvent");
 		
 		try{
-			context.dispatchStatusEventAsync("ANEEvent", "some data?");
+			context.dispatchStatusEventAsync("ANEEvent", "some data");
 		}catch(Error e){
 			log("Error: "+e.getMessage());
 		}

@@ -2,6 +2,9 @@ package com.adobe.sampleasextension;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import android.os.Bundle;
+
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 
@@ -11,6 +14,8 @@ import com.adobe.fre.FREFunction;
 
 public class ANESampleContext extends FREContext 
 {
+	
+	public Bundle bundleData;
 	
 	@Override
 	public void dispose() {
@@ -24,11 +29,11 @@ public class ANESampleContext extends FREContext
 		functionMap.put("getVersion", new getVersion() );
 		functionMap.put("showBrowser", new showBrowser() );
 		functionMap.put("dispatchANEEvent", new dispatchANEEvent() );
-		functionMap.put("getContext", new getContext() );
-		functionMap.put("initMe", new initFunction() );
+		functionMap.put("initExtension", new initFunction() );
 
 		return functionMap;
 	}
+	
 	
 	
 	public void log(String msg){

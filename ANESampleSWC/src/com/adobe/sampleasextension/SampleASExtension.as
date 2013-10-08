@@ -16,7 +16,7 @@ package com.adobe.sampleasextension
 				extContext = ExtensionContext.createExtensionContext("com.adobe.sampleasextension", "");
 				extContext.addEventListener(StatusEvent.STATUS, statusHandle);
 				if (extContext){
-					initMe();
+					initExtension();
 					
 				}else{
 					log("Failed to create extension context.");
@@ -24,9 +24,9 @@ package com.adobe.sampleasextension
 			}
 		}
 		
-		public function initMe():void {
-			log("initMe");
-			extContext.call("initMe");
+		public function initExtension():void {
+			log("initExtension");
+			//extContext.call("initExtension");
 		}
 		
 		public function getVersion():void {
@@ -36,6 +36,10 @@ package com.adobe.sampleasextension
 		public function getContext():ExtensionContext {
 			log("getContext");
 			return extContext;
+		}
+		
+		public function getBundleData():Object{
+			return extContext.call("getBundleData");
 		}
 		
 		public function showBrowser():void {
